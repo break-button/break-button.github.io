@@ -1,9 +1,12 @@
 import { useContext, useState } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image } from 'expo-image';
 import { ThemeContext } from '../contexts/ThemeProvider';
 import { useTimer } from '../hooks';
 import { displayTime } from '../utils';
 import { INITIAL_REMAINING_SECONDS } from '../contants';
+import DarkModeIcon from '../assets/icons/dark-mode.webp';
+import LightModeIcon from '../assets/icons/light-mode.webp';
 
 export default function Main() {
   const [isFingerPrintActive, setIsFingerPrintActive] = useState(false);
@@ -13,14 +16,16 @@ export default function Main() {
   });
 
   const { isDarkMode, toggleIsDarkMode, theme } = useContext(ThemeContext);
-  const lightOrDarkModeText = isDarkMode ? '다크모드 활성화 중' : '라이트 모드 활성화 중';
   
   return (
     <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
-      <Button
-        title={lightOrDarkModeText}
-        onPress={toggleIsDarkMode}
-      />
+      <TouchableOpacity onPress={toggleIsDarkMode}>
+        <Image
+          source={isDarkMode ? DarkModeIcon : LightModeIcon}
+          transition={500}
+          style={{ width: 48, height: 48 }}
+        /> 
+      </TouchableOpacity>
 
       <Text style={{ color: theme.color }}>{displayTime(remainingSeconds)}</Text>
 
