@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useContext, useState } from 'react';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ThemeContext } from '../contexts/ThemeProvider';
 import { useTimer } from '../hooks';
 import { displayTime } from '../utils';
 import { INITIAL_REMAINING_SECONDS } from '../contants';
@@ -10,10 +11,18 @@ export default function Main() {
       initialSeconds: INITIAL_REMAINING_SECONDS,
       active: isFingerPrintActive,
   });
+
+  const { isDarkMode, toggleIsDarkMode, theme } = useContext(ThemeContext);
+  const lightOrDarkModeText = isDarkMode ? '다크모드 활성화 중' : '라이트 모드 활성화 중';
   
   return (
-    <View style={styles.container}>
-      <Text>{displayTime(remainingSeconds)}</Text>
+    <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
+      <Button
+        title={lightOrDarkModeText}
+        onPress={toggleIsDarkMode}
+      />
+
+      <Text style={{ color: theme.color }}>{displayTime(remainingSeconds)}</Text>
 
       <View style={{ paddingVertical: 20 }}/>
 
@@ -21,7 +30,7 @@ export default function Main() {
         onPress={reset}
         style={{ padding: 20, backgroundColor: 'red' }}
       >
-        <Text>Reset</Text>
+        <Text style={{ color: theme.color }}>Reset</Text>
       </TouchableOpacity>
 
       <View style={{ paddingVertical: 20 }}/>
@@ -31,7 +40,7 @@ export default function Main() {
         onPressOut={() => setIsFingerPrintActive(false)}
         style={{ padding: 20, backgroundColor: 'red' }}
       >
-        <Text>Go</Text>
+        <Text style={{ color: theme.color }}>Go</Text>
       </TouchableOpacity>
     </View>
   );
@@ -40,7 +49,6 @@ export default function Main() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
