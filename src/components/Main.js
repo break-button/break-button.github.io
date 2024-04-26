@@ -1,6 +1,8 @@
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Image } from 'expo-image';
+import { StatusBar } from 'expo-status-bar';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../contexts/ThemeProvider';
 import { useTimer } from '../hooks';
 import { displayTime } from '../utils';
@@ -18,36 +20,41 @@ export default function Main() {
   const { isDarkMode, toggleIsDarkMode, theme } = useContext(ThemeContext);
   
   return (
-    <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
-      <TouchableOpacity onPress={toggleIsDarkMode}>
-        <Image
-          source={isDarkMode ? DarkModeIcon : LightModeIcon}
-          transition={500}
-          style={{ width: 48, height: 48 }}
-        /> 
-      </TouchableOpacity>
+    <React.Fragment>
+      <StatusBar style={isDarkMode ? 'light' : 'dark'}/>
 
-      <Text style={{ color: theme.color }}>{displayTime(remainingSeconds)}</Text>
+      <SafeAreaView style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
 
-      <View style={{ paddingVertical: 20 }}/>
+        <TouchableOpacity onPress={toggleIsDarkMode}>
+          <Image
+            source={isDarkMode ? DarkModeIcon : LightModeIcon}
+            transition={0}
+            style={{ width: 36, height: 36 }}
+          /> 
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        onPress={reset}
-        style={{ padding: 20, backgroundColor: 'red' }}
-      >
-        <Text style={{ color: theme.color }}>Reset</Text>
-      </TouchableOpacity>
+        <Text style={{ color: theme.color }}>{displayTime(remainingSeconds)}</Text>
 
-      <View style={{ paddingVertical: 20 }}/>
+        <View style={{ paddingVertical: 20 }}/>
 
-      <TouchableOpacity
-        onPressIn={() => setIsFingerPrintActive(true)}
-        onPressOut={() => setIsFingerPrintActive(false)}
-        style={{ padding: 20, backgroundColor: 'red' }}
-      >
-        <Text style={{ color: theme.color }}>Go</Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity
+          onPress={reset}
+          style={{ padding: 20, backgroundColor: 'red' }}
+        >
+          <Text style={{ color: theme.color }}>Reset</Text>
+        </TouchableOpacity>
+
+        <View style={{ paddingVertical: 20 }}/>
+
+        <TouchableOpacity
+          onPressIn={() => setIsFingerPrintActive(true)}
+          onPressOut={() => setIsFingerPrintActive(false)}
+          style={{ padding: 20, backgroundColor: 'red' }}
+        >
+          <Text style={{ color: theme.color }}>Go</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
+    </React.Fragment>
   );
 }
 
