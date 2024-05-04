@@ -12,12 +12,12 @@ const FONT_WEIGHT_MAP = {
 };
 
 const FONT_SIZE_MAP = {
-    heading: '20px',
-    subHeding: '18px',
-    thirdHeding: '16px',
-    normal: '14px',
-    subInfo: '13px',
-    badge: '12px',
+    heading: 20,
+    subHeding: 18,
+    thirdHeding: 16,
+    normal: 14,
+    subInfo: 13,
+    badge: 12,
 };
 
 const FONT_COLOR_MAP = {
@@ -91,7 +91,7 @@ const SHAPE_BORDER_MAP = {
 };
 
 const SHAPE_ROUNDESS_MAP = {
-    normal: '4px',
+    normal: 4,
     button: '50%',
 };
 

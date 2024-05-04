@@ -7,6 +7,7 @@ import LightModeIcon from '../assets/icons/light-mode.webp';
 import { ThemeContext } from '../contexts';
 import Row from './Row';
 import ButtonWithReaction from './ButtonWithReaction';
+import LatestSevenDays from './LatestSevenDays';
 
 const MODE_ICON_SIZE = 24;
 
@@ -32,16 +33,21 @@ export default function Header() {
 
     const styles = {
         container: {
+            width: '100%',
             position: 'absolute',
             top: 0,
             right: 0,
             marginTop: insets.top,
             padding: 24,
+            justifyContent: 'space-between',
+            alignItems: 'center',
         }
     };
 
     return (
         <Row style={styles.container}>
+            <LatestSevenDays/>
+
             <ModeSwitchButton/>
         </Row>
     )

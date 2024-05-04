@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ThemeContext } from '../contexts/ThemeProvider';
+import { ThemeContext, CountByDateContext } from '../contexts';
 import { useTimer } from '../hooks';
 import { displayTime } from '../utils';
 import { INITIAL_REMAINING_SECONDS } from '../contants';
@@ -13,6 +13,13 @@ import FingerPrintIcon from './FingerPrintIcon';
 import ResetIcon from './ResetIcon';
 
 export default function Main() {
+  const { 
+    increaseTodayCount, 
+    todayCount, 
+    getLatestWeek,
+    countByDate,
+  } = useContext(CountByDateContext);
+
   const [isFingerPrintActive, setIsFingerPrintActive] = useState(false);
   const [remainingSeconds, reset] = useTimer({
       initialSeconds: INITIAL_REMAINING_SECONDS,
@@ -22,6 +29,8 @@ export default function Main() {
   useEffect(() => {
     if (isFinished) {
         setIsFingerPrintActive(false);
+
+        increaseTodayCount();
     }
 }, [isFinished]);
 

@@ -6,3 +6,4 @@ export { default as Header } from './Header';
 export { default as ButtonWithReaction } from './ButtonWithReaction';
 export { default as FingerPrintIcon } from './FingerPrintIcon';
 export { default as ResetIcon } from './ResetIcon';
+export { default as LatestSevenDays } from './LatestSevenDays';
