@@ -69,7 +69,7 @@ export default function ButtonWithReaction({
                 disabled={disabled}
                 onPressIn={handlePressIn}
                 onPressOut={handlePressOut}
-                style={styleProps}
+                style={[styleProps, { opacity: disabled ? 0.1 : 1 }]}
             >
                 {children}
             </TouchableOpacity>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -18,9 +18,15 @@ export default function Main() {
       initialSeconds: INITIAL_REMAINING_SECONDS,
       active: isFingerPrintActive,
   });
+  const isFinished = remainingSeconds <= 0;
+  useEffect(() => {
+    if (isFinished) {
+        setIsFingerPrintActive(false);
+    }
+}, [isFinished]);
 
   const { isDarkMode, theme } = useContext(ThemeContext);
-  
+
   return (
     <React.Fragment>
       <StatusBar style={isDarkMode ? 'light' : 'dark'}/>
@@ -32,7 +38,10 @@ export default function Main() {
 
         <Spacer spacing={20}/>
 
-        <ButtonWithReaction onPressOut={reset}>
+        <ButtonWithReaction 
+          onPressOut={reset}
+          disabled={INITIAL_REMAINING_SECONDS <= remainingSeconds}
+        >
           <ResetIcon />
         </ButtonWithReaction>
 
@@ -41,6 +50,7 @@ export default function Main() {
         <ButtonWithReaction
           onPressIn={() => setIsFingerPrintActive(true)}
           onPressOut={() => setIsFingerPrintActive(false)}
+          disabled={isFinished}
         >
           <FingerPrintIcon />
         </ButtonWithReaction>
