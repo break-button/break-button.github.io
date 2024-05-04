@@ -12,14 +12,10 @@ import ButtonWithReaction from './ButtonWithReaction';
 import FingerPrintIcon from './FingerPrintIcon';
 import ResetIcon from './ResetIcon';
 import ConfettiLottie from './ConfettiLottie';
+import FireLottie from './FireLottie';
 
 export default function Main() {
-  const { 
-    increaseTodayCount, 
-    todayCount, 
-    getLatestWeek,
-    countByDate,
-  } = useContext(CountByDateContext);
+  const { increaseTodayCount } = useContext(CountByDateContext);
 
   const [isFingerPrintActive, setIsFingerPrintActive] = useState(false);
   const [remainingSeconds, reset] = useTimer({
@@ -46,6 +42,10 @@ export default function Main() {
 
         <Header />
 
+        <FireLottie active={isFingerPrintActive} />
+
+        <Spacer spacing={2} />
+        
         <Text style={[styles.timerText, { color: theme.color }]}>{displayTime(remainingSeconds)}</Text>
 
         <Spacer spacing={20}/>

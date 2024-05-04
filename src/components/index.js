@@ -8,3 +8,4 @@ export { default as FingerPrintIcon } from './FingerPrintIcon';
 export { default as ResetIcon } from './ResetIcon';
 export { default as LatestSevenDays } from './LatestSevenDays';
 export { default as ConfettiLottie } from './ConfettiLottie';
+export { default as FireLottie } from './FireLottie';
