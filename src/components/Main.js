@@ -1,14 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Image } from 'expo-image';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../contexts/ThemeProvider';
 import { useTimer } from '../hooks';
 import { displayTime } from '../utils';
 import { INITIAL_REMAINING_SECONDS } from '../contants';
-import DarkModeIcon from '../assets/icons/dark-mode.webp';
-import LightModeIcon from '../assets/icons/light-mode.webp';
+import Spacer from './Spacer';
+import Header from './Header';
 
 export default function Main() {
   const [isFingerPrintActive, setIsFingerPrintActive] = useState(false);
@@ -17,25 +16,18 @@ export default function Main() {
       active: isFingerPrintActive,
   });
 
-  const { isDarkMode, toggleIsDarkMode, theme } = useContext(ThemeContext);
+  const { isDarkMode, theme } = useContext(ThemeContext);
   
   return (
     <React.Fragment>
       <StatusBar style={isDarkMode ? 'light' : 'dark'}/>
 
       <SafeAreaView style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
-
-        <TouchableOpacity onPress={toggleIsDarkMode}>
-          <Image
-            source={isDarkMode ? DarkModeIcon : LightModeIcon}
-            transition={0}
-            style={{ width: 36, height: 36 }}
-          /> 
-        </TouchableOpacity>
+        <Header />
 
         <Text style={{ color: theme.color }}>{displayTime(remainingSeconds)}</Text>
 
-        <View style={{ paddingVertical: 20 }}/>
+        <Spacer spacing={20}/>
 
         <TouchableOpacity
           onPress={reset}
@@ -44,7 +36,7 @@ export default function Main() {
           <Text style={{ color: theme.color }}>Reset</Text>
         </TouchableOpacity>
 
-        <View style={{ paddingVertical: 20 }}/>
+        <Spacer spacing={20}/>
 
         <TouchableOpacity
           onPressIn={() => setIsFingerPrintActive(true)}
@@ -63,5 +55,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'relative',
   },
 });
