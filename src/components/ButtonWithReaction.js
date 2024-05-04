@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { TouchableWithoutFeedback } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { ThemeContext } from '../contexts';
 import Column from './Column';
 
@@ -64,7 +64,7 @@ export default function ButtonWithReaction({
 
     return (
         <Column style={{ position: 'relative', justifyContent: 'center', alignItems: 'center' }}>
-            <TouchableWithoutFeedback
+            <TouchableOpacity
                 {...otherProps}
                 disabled={disabled}
                 onPressIn={handlePressIn}
@@ -72,7 +72,7 @@ export default function ButtonWithReaction({
                 style={styleProps}
             >
                 {children}
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
 
             {isActive && <Column style={styles.touchAreaOverLay} />}
         </Column>

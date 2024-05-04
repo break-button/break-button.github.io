@@ -9,6 +9,8 @@ import { INITIAL_REMAINING_SECONDS } from '../contants';
 import Spacer from './Spacer';
 import Header from './Header';
 import ButtonWithReaction from './ButtonWithReaction';
+import FingerPrintIcon from './FingerPrintIcon';
+import ResetIcon from './ResetIcon';
 
 export default function Main() {
   const [isFingerPrintActive, setIsFingerPrintActive] = useState(false);
@@ -31,7 +33,7 @@ export default function Main() {
         <Spacer spacing={20}/>
 
         <ButtonWithReaction onPressOut={reset}>
-          <Text style={{ color: theme.color, padding: 20, backgroundColor: 'red' }}>Reset</Text>
+          <ResetIcon />
         </ButtonWithReaction>
 
         <Spacer spacing={20}/>
@@ -40,7 +42,7 @@ export default function Main() {
           onPressIn={() => setIsFingerPrintActive(true)}
           onPressOut={() => setIsFingerPrintActive(false)}
         >
-          <Text style={{ color: theme.color, padding: 20, backgroundColor: 'red', }}>Go</Text>
+          <FingerPrintIcon />
         </ButtonWithReaction>
       </SafeAreaView>
     </React.Fragment>
