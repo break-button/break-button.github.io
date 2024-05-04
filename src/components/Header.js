@@ -6,6 +6,7 @@ import DarkModeIcon from '../assets/icons/dark-mode.webp';
 import LightModeIcon from '../assets/icons/light-mode.webp';
 import { ThemeContext } from '../contexts';
 import Row from './Row';
+import ButtonWithReaction from './ButtonWithReaction';
 
 const MODE_ICON_SIZE = 24;
 
@@ -13,13 +14,16 @@ function ModeSwitchButton() {
     const { isDarkMode, toggleIsDarkMode } = useContext(ThemeContext);
 
     return (
-        <TouchableOpacity onPress={toggleIsDarkMode}>
+        <ButtonWithReaction
+            onPressOut={toggleIsDarkMode}
+            radius={24}
+        >
           <Image
             source={isDarkMode ? DarkModeIcon : LightModeIcon}
             transition={0}
             style={{ width: MODE_ICON_SIZE, height: MODE_ICON_SIZE }}
           /> 
-        </TouchableOpacity>
+        </ButtonWithReaction>
     )
 }
 
