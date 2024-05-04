@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../contexts/ThemeProvider';
@@ -8,6 +8,7 @@ import { displayTime } from '../utils';
 import { INITIAL_REMAINING_SECONDS } from '../contants';
 import Spacer from './Spacer';
 import Header from './Header';
+import ButtonWithReaction from './ButtonWithReaction';
 
 export default function Main() {
   const [isFingerPrintActive, setIsFingerPrintActive] = useState(false);
@@ -29,22 +30,18 @@ export default function Main() {
 
         <Spacer spacing={20}/>
 
-        <TouchableOpacity
-          onPress={reset}
-          style={{ padding: 20, backgroundColor: 'red' }}
-        >
-          <Text style={{ color: theme.color }}>Reset</Text>
-        </TouchableOpacity>
+        <ButtonWithReaction onPressOut={reset}>
+          <Text style={{ color: theme.color, padding: 20, backgroundColor: 'red' }}>Reset</Text>
+        </ButtonWithReaction>
 
         <Spacer spacing={20}/>
 
-        <TouchableOpacity
+        <ButtonWithReaction
           onPressIn={() => setIsFingerPrintActive(true)}
           onPressOut={() => setIsFingerPrintActive(false)}
-          style={{ padding: 20, backgroundColor: 'red' }}
         >
-          <Text style={{ color: theme.color }}>Go</Text>
-        </TouchableOpacity>
+          <Text style={{ color: theme.color, padding: 20, backgroundColor: 'red', }}>Go</Text>
+        </ButtonWithReaction>
       </SafeAreaView>
     </React.Fragment>
   );
