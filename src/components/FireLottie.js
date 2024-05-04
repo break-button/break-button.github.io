@@ -22,7 +22,7 @@ function FireLottie({ active }) {
     const animationRef = useRef(null);
     useEffect(() => {
         if (active) {
-            animationRef.current?.play();
+            animationRef.current?.resume();
         } else {
             animationRef.current?.pause();
         }
