@@ -1,50 +1,42 @@
 import React, { createContext, useEffect, useCallback, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { getItem, setItem } from '../storage';
+import { useToday } from '../hooks';
 
 export const CountByDateContext = createContext();
 
 const KEY = '@dopamine-detox/count-by-date';
 
-const today = dayjs(Date.now()).format('YYYY-MM-DD');
-const defaultValue = { [today]: [] };
-
 export default function CountByDateProvider({ children }) {
+    const today = useToday();
+    const defaultValue = { [today]: [] };
+
     const [countByDate, setCountByDate] = useState(defaultValue);
+    const updateCountByDate = useCallback(async (newCountByDate) => {
+        await setItem(KEY, typeof newCountByDate);
+        setCountByDate(newCountByDate);
+    }, [countByDate]);
 
     useEffect(() => {
         const fetchCountByDate = async () => {
-            const originalCountByDate = await getItem(KEY) || defaultValue;
-            setCountByDate(originalCountByDate);
-        }
+            const originalCountByDate = await getItem(KEY) || {};
+            setCountByDate({ ...defaultValue, ...originalCountByDate });
+        };
 
         fetchCountByDate();
-    }, []);
-
-    const changeCountByDate = useCallback(
-        async (dataOrFunc) => {
-            await setItem(
-                KEY, 
-                typeof dataOrFunc === 'function' ? dataOrFunc(countByDate) : dataOrFunc,
-            );
-
-            setCountByDate(dataOrFunc);
-        },
-        [countByDate],
-    );
+    }, [today]);
 
     const increaseTodayCount = () => {
         const copiedCountByDate = { ...countByDate };
-        const copiedTodayCounts = [...copiedCountByDate[today]];
+        const copiedTodayTries = [...copiedCountByDate[today]];
 
-        copiedTodayCounts.push(Date.now());
+        const tryingTimeTag = Date.now();
+        copiedTodayTries.push(tryingTimeTag);
 
-        copiedCountByDate[today] = copiedTodayCounts;
+        copiedCountByDate[today] = copiedTodayTries;
 
-        changeCountByDate(copiedCountByDate);
+        updateCountByDate(copiedCountByDate);
     };
-
-    const todayCount = countByDate[today]?.length || 0;
 
     const getLatestWeek = () => {
         return Array(7)
@@ -57,15 +49,10 @@ export default function CountByDateProvider({ children }) {
             })
     };
 
-    const context = useMemo(
-        () => ({
-            countByDate,
-            todayCount,
-            increaseTodayCount,
-            getLatestWeek,
-        }),
-        [countByDate],
-    );
+    const context = useMemo(() => ({ 
+        increaseTodayCount, 
+        getLatestWeek
+     }), [countByDate]);
 
     return (
         <CountByDateContext.Provider value={context}>
