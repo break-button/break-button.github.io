@@ -13,7 +13,7 @@ export default function CountByDateProvider({ children }) {
 
     const [countByDate, setCountByDate] = useState(defaultValue);
     const updateCountByDate = useCallback(async (newCountByDate) => {
-        await setItem(KEY, typeof newCountByDate);
+        await setItem(KEY, newCountByDate);
         setCountByDate(newCountByDate);
     }, [countByDate]);
 
