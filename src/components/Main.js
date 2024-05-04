@@ -26,7 +26,7 @@ export default function Main() {
       <SafeAreaView style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
         <Header />
 
-        <Text style={[styles.timerText, { ...theme }]}>{displayTime(remainingSeconds)}</Text>
+        <Text style={[styles.timerText, { color: theme.color }]}>{displayTime(remainingSeconds)}</Text>
 
         <Spacer spacing={20}/>
 
