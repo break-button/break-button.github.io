@@ -25,7 +25,7 @@ export default function Main() {
       <SafeAreaView style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
         <Header />
 
-        <Text style={{ color: theme.color }}>{displayTime(remainingSeconds)}</Text>
+        <Text style={[styles.timerText, { ...theme }]}>{displayTime(remainingSeconds)}</Text>
 
         <Spacer spacing={20}/>
 
@@ -56,5 +56,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
+  },
+  timerText: {
+    fontSize: 60,
   },
 });
