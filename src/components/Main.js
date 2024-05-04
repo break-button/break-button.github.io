@@ -11,6 +11,7 @@ import Header from './Header';
 import ButtonWithReaction from './ButtonWithReaction';
 import FingerPrintIcon from './FingerPrintIcon';
 import ResetIcon from './ResetIcon';
+import ConfettiLottie from './ConfettiLottie';
 
 export default function Main() {
   const { 
@@ -41,6 +42,8 @@ export default function Main() {
       <StatusBar style={isDarkMode ? 'light' : 'dark'}/>
 
       <SafeAreaView style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
+        <ConfettiLottie active={isFinished}/>
+
         <Header />
 
         <Text style={[styles.timerText, { color: theme.color }]}>{displayTime(remainingSeconds)}</Text>
