@@ -48,7 +48,7 @@ export default function Main() {
         
         <Text style={[styles.timerText, { color: theme.color }]}>{displayTime(remainingSeconds)}</Text>
 
-        <Spacer spacing={20}/>
+        <Spacer spacing={15}/>
 
         <ButtonWithReaction 
           onPressOut={reset}
@@ -57,7 +57,7 @@ export default function Main() {
           <ResetIcon />
         </ButtonWithReaction>
 
-        <Spacer spacing={20}/>
+        <Spacer spacing={15}/>
 
         <ButtonWithReaction
           onPressIn={() => setIsFingerPrintActive(true)}
@@ -79,6 +79,6 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   timerText: {
-    fontSize: 60,
+    fontSize: 30,
   },
 });
