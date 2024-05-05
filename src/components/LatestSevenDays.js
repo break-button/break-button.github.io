@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Text } from 'react-native';
-import { FONT_SIZE_MAP, FONT_WEIGHT_MAP } from '../contants';
+import { FONT_COLOR_MAP, FONT_SIZE_MAP, FONT_WEIGHT_MAP } from '../contants';
 import { ThemeContext, RecordByDateContext } from '../contexts';
 import Spacer from './Spacer';
 import Row from './Row'
@@ -24,27 +24,29 @@ function Day({ label, count, today }) {
             backgroundColor: theme.accent,
             opacity: 0.3,
         },
-        label: {
+        text: {
             fontSize: FONT_SIZE_MAP.badge,
-            fontWeight: FONT_WEIGHT_MAP.badge,
-            color: theme.color,
+            fontWeight: FONT_WEIGHT_MAP.thin,
+            color: FONT_COLOR_MAP.badge,
         },
-        count: {
+        todayText: {
             fontSize: FONT_SIZE_MAP.badge,
-            fontWeight: FONT_WEIGHT_MAP.badge,
+            fontWeight: FONT_WEIGHT_MAP.bold,
             color: theme.color,
         },
     };
 
+    const textStyle = today ? styles.todayText : styles.text;
+
     return (
         <Column style={styles.container}>
-            {today && <Column style={styles.indicator} />}
+            {(count > 0) && <Column style={styles.indicator} />}
 
-            <Text style={styles.label}>{label}</Text>
+            <Text style={textStyle}>{label}</Text>
 
             <Spacer spacing={1} />
 
-            <Text style={styles.count}>{count}</Text>
+            <Text style={textStyle}>{count}</Text>
         </Column>
     );
 }
