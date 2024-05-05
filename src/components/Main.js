@@ -3,7 +3,7 @@ import { StyleSheet, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
-import { ThemeContext, CountByDateContext } from '../contexts';
+import { ThemeContext, RecordByDateContext } from '../contexts';
 import { useTimer } from '../hooks';
 import { displayTime } from '../utils';
 import { INITIAL_REMAINING_SECONDS } from '../contants';
@@ -16,7 +16,7 @@ import ConfettiLottie from './ConfettiLottie';
 import FireLottie from './FireLottie';
 
 export default function Main() {
-  const { increaseTodayCount } = useContext(CountByDateContext);
+  const { addRecord } = useContext(RecordByDateContext);
 
   const [isFingerPrintActive, setIsFingerPrintActive] = useState(false);
   const [remainingSeconds, reset] = useTimer({
@@ -28,7 +28,7 @@ export default function Main() {
     if (isFinished) {
         setIsFingerPrintActive(false);
 
-        increaseTodayCount();
+        addRecord({ seconds: INITIAL_REMAINING_SECONDS });
     }
 }, [isFinished]);
 

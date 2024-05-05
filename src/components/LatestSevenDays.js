@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Text } from 'react-native';
 import { FONT_SIZE_MAP, FONT_WEIGHT_MAP } from '../contants';
-import { ThemeContext, CountByDateContext } from '../contexts';
+import { ThemeContext, RecordByDateContext } from '../contexts';
 import Spacer from './Spacer';
 import Row from './Row'
 import Column from './Column';
@@ -50,7 +50,7 @@ function Day({ label, count, today }) {
 }
 
 function LatestSevenDays() {
-    const { getLatestWeek } = useContext(CountByDateContext);
+    const { getLatestRecords } = useContext(RecordByDateContext);
     const { theme } = useContext(ThemeContext);
 
     const styles = {
@@ -65,7 +65,7 @@ function LatestSevenDays() {
 
     return (
         <Row style={styles.container}>
-            {getLatestWeek().map((day) => (
+            {getLatestRecords(7).map((day) => (
                 <Day
                     key={day.label}
                     {...day}
