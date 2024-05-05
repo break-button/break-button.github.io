@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import * as Haptics from 'expo-haptics';
 import { ThemeContext, CountByDateContext } from '../contexts';
 import { useTimer } from '../hooks';
 import { displayTime } from '../utils';
@@ -30,6 +31,12 @@ export default function Main() {
         increaseTodayCount();
     }
 }, [isFinished]);
+
+  useEffect(() => {
+      if (isFingerPrintActive && remainingSeconds % 60 === 0) {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      }
+  }, [remainingSeconds, isFingerPrintActive]);
 
   const { isDarkMode, theme } = useContext(ThemeContext);
 
