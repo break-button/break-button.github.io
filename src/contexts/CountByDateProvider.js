@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useCallback, useMemo, useState } from 
 import dayjs from 'dayjs';
 import { getItem, setItem } from '../storage';
 import { useToday } from '../hooks';
+import { INITIAL_REMAINING_SECONDS } from '../contants';
 
 export const CountByDateContext = createContext();
 
@@ -30,8 +31,11 @@ export default function CountByDateProvider({ children }) {
         const copiedCountByDate = { ...countByDate };
         const copiedTodayTries = [...copiedCountByDate[today]];
 
-        const tryingTimeTag = Date.now();
-        copiedTodayTries.push(tryingTimeTag);
+        const trying = {
+            createdAt: Date.now(),
+            seconds: INITIAL_REMAINING_SECONDS,
+        };
+        copiedTodayTries.push(trying);
 
         copiedCountByDate[today] = copiedTodayTries;
 
