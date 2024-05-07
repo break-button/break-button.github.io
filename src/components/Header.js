@@ -1,13 +1,13 @@
 import { useContext } from "react";
-import { TouchableOpacity, StyleSheet } from "react-native";
 import { Image } from 'expo-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import DarkModeIcon from '../assets/icons/dark-mode.webp';
 import LightModeIcon from '../assets/icons/light-mode.webp';
-import { ThemeContext } from '../contexts';
+import { FeatureFlagContext, ThemeContext } from '../contexts';
 import Row from './Row';
 import ButtonWithReaction from './ButtonWithReaction';
 import LatestSevenDays from './LatestSevenDays';
+import Column from "./Column";
 
 const MODE_ICON_SIZE = 24;
 
@@ -39,16 +39,21 @@ export default function Header() {
             right: 0,
             marginTop: insets.top,
             padding: 24,
-            justifyContent: 'space-between',
             alignItems: 'center',
         }
     };
 
+    const { enableDarkMode, showLatestRecords } = useContext(FeatureFlagContext);
+
     return (
         <Row style={styles.container}>
-            <LatestSevenDays/>
+            {showLatestRecords && <LatestSevenDays/>}
 
-            <ModeSwitchButton/>
+            {enableDarkMode && (
+                <Column style={{ marginLeft: 'auto' }}>
+                    <ModeSwitchButton/>
+                </Column>
+            )}
         </Row>
     )
 }

@@ -3,7 +3,7 @@ import { StyleSheet, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
-import { ThemeContext, RecordByDateContext } from '../contexts';
+import { ThemeContext, RecordByDateContext, FeatureFlagContext } from '../contexts';
 import { useTimer } from '../hooks';
 import { displayTime } from '../utils';
 import { INITIAL_REMAINING_SECONDS } from '../contants';
@@ -32,11 +32,14 @@ export default function Main() {
     }
 }, [isFinished]);
 
+  const { showConfettiLottie, showFireLottie, enableHapticFeedback } = useContext(FeatureFlagContext);
   useEffect(() => {
       if (isFingerPrintActive && remainingSeconds % 60 === 0) {
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        if (enableHapticFeedback) {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        }
       }
-  }, [remainingSeconds, isFingerPrintActive]);
+  }, [remainingSeconds, isFingerPrintActive, enableHapticFeedback]);
 
   const { isDarkMode, theme } = useContext(ThemeContext);
 
@@ -45,13 +48,17 @@ export default function Main() {
       <StatusBar style={isDarkMode ? 'light' : 'dark'}/>
 
       <SafeAreaView style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
-        <ConfettiLottie active={isFinished}/>
+        {showConfettiLottie && <ConfettiLottie active={isFinished}/>}
 
         <Header />
 
-        <FireLottie active={isFingerPrintActive} />
+        {showFireLottie && (
+          <React.Fragment>
+            <FireLottie active={isFingerPrintActive} />
 
-        <Spacer spacing={2} />
+            <Spacer spacing={2} />
+          </React.Fragment>
+        )}
         
         <Text style={[styles.timerText, { color: theme.color }]}>{displayTime(remainingSeconds)}</Text>
 
