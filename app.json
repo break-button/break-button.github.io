@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Break Button",
-    "slug": "Break Button",
+    "slug": "break-button",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,16 +15,25 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.swseok.breakbutton",
+      "buildNumber": "1.0.1"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.swseok.breakbutton",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3795fbb0-2bf0-4287-b1a9-eb4864c46fdc"
+      }
     }
   }
 }
