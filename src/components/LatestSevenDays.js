@@ -12,7 +12,6 @@ function Day({ label, count, today }) {
         container: {
             position: 'relative',
             alignItems: 'center',
-            width: 24,
         },
         indicator: {
             position: 'absolute',
@@ -57,7 +56,7 @@ function LatestSevenDays() {
 
     const styles = {
         container: {
-            gap: 6,
+            gap: 8,
             borderWidth: 1,
             borderColor: theme.color,
             borderRadius: 4,

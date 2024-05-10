@@ -4,12 +4,12 @@ export const FeatureFlagContext = createContext();
 
 export default function FeatureFlagProvider({ children }) {
     const context = useMemo(() => ({
-        enableDarkMode: false,
-        showLatestRecords: false,
-        enableHapticFeedback: false,
+        enableDarkMode: true,
+        showLatestRecords: true,
+        enableHapticFeedback: true,
         skipAds: false,
-        showFireLottie: false,
-        showConfettiLottie: false,
+        showFireLottie: true,
+        showConfettiLottie: true,
     }), []);
 
     return (
