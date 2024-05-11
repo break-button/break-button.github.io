@@ -10,3 +10,4 @@ export { default as LatestSevenDays } from './LatestSevenDays';
 export { default as ConfettiLottie } from './ConfettiLottie';
 export { default as FireLottie } from './FireLottie';
 export { default as TourStep } from './TourStep';
+export { default as ModeSwitchButton } from './ModeSwitchButton';

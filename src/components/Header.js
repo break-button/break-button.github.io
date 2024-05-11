@@ -1,33 +1,11 @@
 import { useContext } from "react";
-import { Image } from 'expo-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import DarkModeIcon from '../assets/icons/dark-mode.webp';
-import LightModeIcon from '../assets/icons/light-mode.webp';
-import { FeatureFlagContext, ThemeContext } from '../contexts';
+import { FeatureFlagContext } from '../contexts';
 import Row from './Row';
-import ButtonWithReaction from './ButtonWithReaction';
 import LatestSevenDays from './LatestSevenDays';
 import Column from "./Column";
 import TourStep from './TourStep';
-
-const MODE_ICON_SIZE = 24;
-
-function ModeSwitchButton() {
-    const { isDarkMode, toggleIsDarkMode } = useContext(ThemeContext);
-
-    return (
-        <ButtonWithReaction
-            onPressOut={toggleIsDarkMode}
-            radius={24}
-        >
-          <Image
-            source={isDarkMode ? DarkModeIcon : LightModeIcon}
-            transition={0}
-            style={{ width: MODE_ICON_SIZE, height: MODE_ICON_SIZE }}
-          /> 
-        </ButtonWithReaction>
-    )
-}
+import ModeSwitchButton from './ModeSwitchButton';
 
 export default function Header() {
     const insets = useSafeAreaInsets();
