@@ -14,7 +14,7 @@ const stringMap = {
         'tour-steps.buttons.skip': 'Skip',
         'tour-steps.buttons.finish': 'Finish',
     },
-    'kr_KR': {
+    'ko_KR': {
         'tour-steps.finger-print.description': '타이머 활성화를 위해 지문 버튼을 누르세요.',
         'tour-steps.reset.description': '타이머 초기화를 위한 버튼입니다.',
         'tour-steps.timer.description': '남은 시간을 확인하세요.',
@@ -33,4 +33,4 @@ const locale = Platform.OS === 'ios'
     ? NativeModules.SettingsManager.settings.AppleLocale || NativeModules.SettingsManager.settings.AppleLanguages[0]
     : NativeModules.I18nManager.localeIdentifier;
 
-export default stringMap[locale === 'kr_KR' ? 'kr_KR' : 'en_US'];
+export default stringMap[locale === 'ko_KR' ? 'ko_KR' : 'en_US'];
