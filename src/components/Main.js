@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
 import { ThemeContext, RecordByDateContext, FeatureFlagContext } from '../contexts';
-import { useTimer } from '../hooks';
+import { useTimer, useTourGuide } from '../hooks';
 import { displayTime } from '../utils';
 import { INITIAL_REMAINING_SECONDS } from '../contants';
 import Spacer from './Spacer';
@@ -14,6 +14,7 @@ import FingerPrintIcon from './FingerPrintIcon';
 import ResetIcon from './ResetIcon';
 import ConfettiLottie from './ConfettiLottie';
 import FireLottie from './FireLottie';
+import TourStep from './TourStep';
 
 export default function Main() {
   const { addRecord } = useContext(RecordByDateContext);
@@ -43,6 +44,8 @@ export default function Main() {
 
   const { isDarkMode, theme } = useContext(ThemeContext);
 
+  useTourGuide();
+
   return (
     <React.Fragment>
       <StatusBar style={isDarkMode ? 'light' : 'dark'}/>
@@ -54,32 +57,40 @@ export default function Main() {
 
         {showFireLottie && (
           <React.Fragment>
-            <FireLottie active={isFingerPrintActive} />
+            <TourStep stepKey={'FIRE_LOTTIE'}>
+              <FireLottie active={isFingerPrintActive} />
+            </TourStep>
 
             <Spacer spacing={2} />
           </React.Fragment>
         )}
         
-        <Text style={[styles.timerText, { color: theme.color }]}>{displayTime(remainingSeconds)}</Text>
+        <TourStep stepKey={'TIMER'}>
+          <Text style={[styles.timerText, { color: theme.color }]}>{displayTime(remainingSeconds)}</Text>
+        </TourStep>
 
         <Spacer spacing={15}/>
 
-        <ButtonWithReaction 
-          onPressOut={reset}
-          disabled={INITIAL_REMAINING_SECONDS <= remainingSeconds}
-        >
-          <ResetIcon />
-        </ButtonWithReaction>
+        <TourStep stepKey={'RESET'}>
+          <ButtonWithReaction 
+            onPressOut={reset}
+            disabled={INITIAL_REMAINING_SECONDS <= remainingSeconds}
+          >
+            <ResetIcon />
+          </ButtonWithReaction>
+        </TourStep>
 
         <Spacer spacing={15}/>
 
-        <ButtonWithReaction
-          onPressIn={() => setIsFingerPrintActive(true)}
-          onPressOut={() => setIsFingerPrintActive(false)}
-          disabled={isFinished}
-        >
-          <FingerPrintIcon />
-        </ButtonWithReaction>
+        <TourStep stepKey={'FINGER_PRINT'}>
+          <ButtonWithReaction
+            onPressIn={() => setIsFingerPrintActive(true)}
+            onPressOut={() => setIsFingerPrintActive(false)}
+            disabled={isFinished}
+          >
+            <FingerPrintIcon />
+          </ButtonWithReaction>
+        </TourStep>
       </SafeAreaView>
     </React.Fragment>
   );

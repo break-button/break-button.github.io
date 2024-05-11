@@ -8,6 +8,7 @@ import Row from './Row';
 import ButtonWithReaction from './ButtonWithReaction';
 import LatestSevenDays from './LatestSevenDays';
 import Column from "./Column";
+import TourStep from './TourStep';
 
 const MODE_ICON_SIZE = 24;
 
@@ -47,11 +48,17 @@ export default function Header() {
 
     return (
         <Row style={styles.container}>
-            {showLatestRecords && <LatestSevenDays/>}
+            {showLatestRecords && (
+                <TourStep stepKey={'LATEST_RECORDS'}>
+                    <LatestSevenDays/>
+                </TourStep>
+            )}
 
             {enableDarkMode && (
                 <Column style={{ marginLeft: 'auto' }}>
-                    <ModeSwitchButton/>
+                    <TourStep stepKey={'MODE_SWITCH'}>
+                        <ModeSwitchButton/>
+                    </TourStep>
                 </Column>
             )}
         </Row>
