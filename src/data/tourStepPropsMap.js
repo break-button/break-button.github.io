@@ -34,4 +34,10 @@ export default tourStepPropsMap = {
         maskOffset: 16,
         shape: 'circle',
     },
+    'SHOW_GUIDE': {
+        zone: 7,
+        text: stringMap['tour-steps.show-guide.description'],
+        maskOffset: 16,
+        shape: 'circle',
+    },
 };
