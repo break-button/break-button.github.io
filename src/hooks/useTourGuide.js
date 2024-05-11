@@ -19,7 +19,7 @@ export default function useTourGuide() {
 
     useEffect(() => {
         if (canStart && (everShowGuide === false)) {
-            start()
+            setTimeout(() => { start() }, 100);
         }
     }, [canStart, everShowGuide]);
 }
