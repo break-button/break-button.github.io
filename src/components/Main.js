@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { Platform, StyleSheet, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Helmet } from 'react-helmet';
 import { ThemeContext, RecordByDateContext, FeatureFlagContext } from '../contexts';
 import { useTimer, useTourGuide, useHapticFeedback } from '../hooks';
 import { displayTime } from '../utils';
@@ -42,7 +43,14 @@ export default function Main() {
 
   return (
     <React.Fragment>
-      <StatusBar style={isDarkMode ? 'light' : 'dark'}/>
+      {Platform.OS === 'web' ? (
+        <Helmet>
+            <meta
+                name="theme-color"
+                content={theme.backgroundColor}
+            />
+        </Helmet>
+      ) : <StatusBar style={isDarkMode ? 'light' : 'dark'}/>}
 
       <SafeAreaView style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
         {showConfettiLottie && <ConfettiLottie active={isFinished}/>}
