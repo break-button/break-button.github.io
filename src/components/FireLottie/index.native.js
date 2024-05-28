@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Animated, StyleSheet } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { Image } from 'expo-image';
-import Lottie from '../assets/lotties/cute-fire-lottie.json';
-import BornFire from '../assets/images/bone-fire.webp';
-import Column from './Column';
+import Lottie from '../../assets/lotties/cute-fire-lottie.json';
+import BornFire from '../../assets/images/bone-fire.webp';
+import Column from '../Column';
 
 const AnimatedLottieView = Animated.createAnimatedComponent(LottieView);
 

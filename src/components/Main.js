@@ -2,9 +2,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import * as Haptics from 'expo-haptics';
 import { ThemeContext, RecordByDateContext, FeatureFlagContext } from '../contexts';
-import { useTimer, useTourGuide } from '../hooks';
+import { useTimer, useTourGuide, useHapticFeedback } from '../hooks';
 import { displayTime } from '../utils';
 import { INITIAL_REMAINING_SECONDS } from '../contants';
 import Spacer from './Spacer';
@@ -34,13 +33,8 @@ export default function Main() {
 }, [isFinished]);
 
   const { showConfettiLottie, showFireLottie, enableHapticFeedback } = useContext(FeatureFlagContext);
-  useEffect(() => {
-      if (isFingerPrintActive && remainingSeconds % 60 === 0) {
-        if (enableHapticFeedback) {
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-        }
-      }
-  }, [remainingSeconds, isFingerPrintActive, enableHapticFeedback]);
+
+  useHapticFeedback(enableHapticFeedback && isFingerPrintActive && remainingSeconds % 60 === 0);
 
   const { isDarkMode, theme } = useContext(ThemeContext);
 

@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
+import { Platform } from "react-native";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FeatureFlagContext } from '../contexts';
 import Row from './Row';
@@ -41,11 +42,15 @@ export default function Header() {
 
             {enableDarkMode && (
                 <Row style={styles.buttons}>
-                    <TourStep stepKey={'SHOW_GUIDE'}>
-                        <ShowGuideButton/>
-                    </TourStep>
+                    {Platform.OS !== 'web' ? (
+                        <React.Fragment>
+                            <TourStep stepKey={'SHOW_GUIDE'}>
+                                <ShowGuideButton/>
+                            </TourStep>
 
-                    <Spacer spacing={4}/>
+                            <Spacer spacing={4}/>
+                        </React.Fragment>
+                    ) : null}
 
                     <TourStep stepKey={'MODE_SWITCH'}>
                         <ModeSwitchButton/>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTourGuideController } from 'rn-tourguide';
-import { getItem, setItem } from '../storage';
+import { getItem, setItem } from '../../storage';
 
 const KEY = '@dopamine-detox/ever-show-guide';
 

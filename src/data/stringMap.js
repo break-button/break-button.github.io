@@ -31,6 +31,6 @@ const stringMap = {
 
 const locale = Platform.OS === 'ios'
     ? NativeModules.SettingsManager.settings.AppleLocale || NativeModules.SettingsManager.settings.AppleLanguages[0]
-    : NativeModules.I18nManager.localeIdentifier;
+    : NativeModules.I18nManager?.localeIdentifier;
 
 export default stringMap[locale === 'ko_KR' ? 'ko_KR' : 'en_US'];
