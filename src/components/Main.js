@@ -30,7 +30,6 @@ export default function Main() {
   useEffect(() => {
     if (isFinished) {
         setIsFingerPrintActive(false);
-
         addRecord({ seconds: INITIAL_REMAINING_SECONDS });
     }
 }, [isFinished]);
