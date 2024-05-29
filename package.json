@@ -8,7 +8,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "deploy": "gh-pages -t -d dist",
-    "predeploy": "expo export -p web"
+    "predeploy": "expo export -p web && npm run copy-app-ads",
+    "copy-app-ads": "copyfiles app-ads.txt dist/"
   },
   "dependencies": {
     "@expo/html-elements": "^0.10.1",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "copyfiles": "^2.4.1",
     "gh-pages": "^6.1.1"
   },
   "private": true
