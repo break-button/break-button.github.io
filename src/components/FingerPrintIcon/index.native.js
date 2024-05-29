@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { Image } from 'expo-image';
-import LightFingerPrint from '../assets/icons/fingerprint.webp';
-import DarkFingerPrint from '../assets/icons/fingerprint-dark_mode.webp';
-import { ThemeContext } from '../contexts';
+import LightFingerPrint from '../../assets/icons/fingerprint.webp';
+import DarkFingerPrint from '../../assets/icons/fingerprint-dark_mode.webp';
+import { ThemeContext } from '../../contexts';
 
 const ICON_SIZE = 56;
 
