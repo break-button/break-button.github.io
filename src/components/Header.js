@@ -9,6 +9,7 @@ import ModeSwitchButton from './ModeSwitchButton';
 import ShowGuideButton from './ShowGuideButton';
 import Spacer from "./Spacer";
 
+const isWeb = Platform.OS === 'web';
 
 export default function Header() {
     const insets = useSafeAreaInsets();
@@ -42,7 +43,7 @@ export default function Header() {
 
             {enableDarkMode && (
                 <Row style={styles.buttons}>
-                    {Platform.OS !== 'web' ? (
+                    {!isWeb ? (
                         <React.Fragment>
                             <TourStep stepKey={'SHOW_GUIDE'}>
                                 <ShowGuideButton/>

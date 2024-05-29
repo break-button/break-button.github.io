@@ -16,6 +16,8 @@ import ConfettiLottie from './ConfettiLottie';
 import FireLottie from './FireLottie';
 import TourStep from './TourStep';
 
+const isWeb = Platform.OS === 'web';
+
 export default function Main() {
   const { addRecord } = useContext(RecordByDateContext);
 
@@ -43,7 +45,7 @@ export default function Main() {
 
   return (
     <React.Fragment>
-      {Platform.OS === 'web' ? (
+      {isWeb ? (
         <Helmet>
             <meta
                 name="theme-color"
