@@ -4,6 +4,7 @@ import { ThemeContext } from '../contexts';
 import Column from './Column';
 
 const DEFAULT_RADIUS = 52;
+const TOUCH_AREA = 12;
 
 export default function ButtonWithReaction({
     children,
@@ -62,6 +63,15 @@ export default function ButtonWithReaction({
         wrapEventHandler(onPressOut)(e);
     };
 
+    const style = [
+        styleProps,
+        { 
+            opacity: disabled ? 0.1 : 1,
+            margin: -TOUCH_AREA,
+            padding: TOUCH_AREA,
+        },
+    ];
+
     return (
         <Column style={{ position: 'relative', justifyContent: 'center', alignItems: 'center' }}>
             <TouchableOpacity
@@ -69,7 +79,7 @@ export default function ButtonWithReaction({
                 disabled={disabled}
                 onPressIn={handlePressIn}
                 onPressOut={handlePressOut}
-                style={[styleProps, { opacity: disabled ? 0.1 : 1 }]}
+                style={style}
             >
                 {children}
             </TouchableOpacity>
