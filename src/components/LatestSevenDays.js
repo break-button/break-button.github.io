@@ -31,18 +31,13 @@ function Day({ label, count, today, onLayout, width }) {
     const { theme } = useContext(ThemeContext);
     const styles = {
         container: {
-            position: 'relative',
-            alignItems: 'center',
             width,
         },
-        indicator: {
-            position: 'absolute',
-            top: -2,
-            bottom: -2,
-            left: -2,
-            right: -2,
+        innerContainer: {
+            alignItems: 'center',
+            padding: 1.5,
             borderRadius: 2,
-            backgroundColor: theme.accent,
+            backgroundColor: (count > 0) ? theme.accent : undefined,
             opacity: 0.3,
         },
         text: {
@@ -64,13 +59,13 @@ function Day({ label, count, today, onLayout, width }) {
             style={styles.container}
             onLayout={onLayout}
         >
-            {(count > 0) && <Column style={styles.indicator} />}
+            <Column style={styles.innerContainer}>
+                <Text style={textStyle}>{label}</Text>
 
-            <Text style={textStyle}>{label}</Text>
+                <Spacer spacing={1} />
 
-            <Spacer spacing={1} />
-
-            <Text style={textStyle}>{count}</Text>
+                <Text style={textStyle}>{count}</Text>
+            </Column>
         </Column>
     );
 }
@@ -81,11 +76,11 @@ function LatestSevenDays() {
 
     const styles = {
         container: {
-            gap: 8,
+            gap: 2.5,
             borderWidth: 1,
             borderColor: theme.color,
             borderRadius: 4,
-            padding: 4,
+            padding: 3,
         },
     };
     
