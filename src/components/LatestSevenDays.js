@@ -36,9 +36,8 @@ function Day({ label, count, today, onLayout, width }) {
         innerContainer: {
             alignItems: 'center',
             padding: 1.5,
-            borderRadius: 2,
-            backgroundColor: (count > 0) ? theme.accent : undefined,
-            opacity: 0.3,
+            borderRadius: 3,
+            backgroundColor: (count > 0) ? '#3366FF4D' : undefined,
         },
         text: {
             fontSize: FONT_SIZE_MAP.badge,
