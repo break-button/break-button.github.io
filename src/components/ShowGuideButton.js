@@ -6,7 +6,7 @@ import LightModeIcon from '../assets/icons/question.webp';
 import { ThemeContext } from '../contexts';
 import ButtonWithReaction from './ButtonWithReaction';
 
-const ICON_SIZE = 24;
+const ICON_SIZE = 22;
 
 export default function ShowGuideButton() {
     const { isDarkMode } = useContext(ThemeContext);
