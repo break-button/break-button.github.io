@@ -15,8 +15,6 @@ export default function FingerPrintIcon({ size: sizeProp }) {
         container: { 
             alignItems: 'center',
             justifyContent: 'center',
-            padding: size,
-            margin: -size,
             pointEvents: 'box-only',
             touchAction: 'none',
         },
